@@ -20,7 +20,8 @@ app.title = "Fare Insights Dashboard"
 
 app.config['suppress_callback_exceptions'] = True
 
-df_fare_comp = pd.read_csv("C:/Users/varun/fare_comp.csv")
+df_fare_comp = pd.read_csv(
+    "https://raw.githubusercontent.com/varunrishi2006/render-fareanalytics-app/main/src/fare_comp.csv")
 # df_fare_freq = pd.read_excel('C:/Users/varun/Desktop/Personal/SimplyOR/Sample_Data.xlsx', sheet_name='View5')
 
 category_order = CategoricalDtype([
@@ -876,12 +877,12 @@ def update_header_details(dtd_range, market, sector, comp, flight_no, comp_fligh
     comp_departure_details = str(comp_carrier) + " (" + str(comp_departures_perc) + "%)"
 
     # Capturing the total departures which are over-forecasted but underpriced and under-forecasted but overpriced
-    df_client_1.loc[:, 'Departure Status'] = df_client_1.apply(lambda x: calc_flight_status(x.Forecast,
-                                                                                            forecast_lower_limit,
-                                                                                            forecast_upper_limit),
-                                                               axis=1)
+    df_client_1['Departure Status'] = df_client_1.apply(lambda x: calc_flight_status(x.Forecast,
+                                                                                     forecast_lower_limit,
+                                                                                     forecast_upper_limit),
+                                                        axis=1)
 
-    df_client_1.loc[:, 'Departure Status'] = df_client_1['Departure Status'].astype(departure_order)
+    df_client_1['Departure Status'] = df_client_1['Departure Status'].astype(departure_order)
     yield_crit_dep = df_client_1[df_client_1['Departure Status'] == 'Yield Critical Departures']['Flight No'].count()
     load_crit_dep = df_client_1[df_client_1['Departure Status'] == 'Load Critical Departures']['Flight No'].count()
     yield_crit_dep_perc = round(yield_crit_dep / client_departures * 100)
