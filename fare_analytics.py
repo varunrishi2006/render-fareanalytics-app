@@ -21,7 +21,7 @@ app.title = "Fare Insights Dashboard"
 app.config['suppress_callback_exceptions'] = True
 
 df_fare_comp = pd.read_csv(
-    "https://raw.githubusercontent.com/varunrishi2006/render-fareanalytics-app/main/src/fare_comp.csv")
+    "https://raw.githubusercontent.com/varunrishi2006/render-fareanalytics-app/main/fare_comp.csv")
 # df_fare_freq = pd.read_excel('C:/Users/varun/Desktop/Personal/SimplyOR/Sample_Data.xlsx', sheet_name='View5')
 
 category_order = CategoricalDtype([
